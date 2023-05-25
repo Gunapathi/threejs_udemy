@@ -4,6 +4,7 @@ import Stats from 'three/examples/jsm/libs/stats.module'
 import { GUI } from 'dat.gui'
 
 const scene = new THREE.Scene()
+scene.add(new THREE.AxesHelper(5))
 
 const camera = new THREE.PerspectiveCamera(
     75,
@@ -44,15 +45,35 @@ const gui = new GUI
 
 // GUI CONTROLLER - CUBE
 const cubeFolder = gui.addFolder('Cube')
-cubeFolder.add(cube.rotation, 'x', 0, Math.PI * 2)
-cubeFolder.add(cube.rotation, 'y', 0, Math.PI * 2)
-cubeFolder.add(cube.rotation, 'z', 0, Math.PI * 2)
 cubeFolder.open() //remove this to close by default
 
+// GUI CONTROLLER - ROTATION
+const cubeRotationFolder = cubeFolder.addFolder('Rotation')
+cubeRotationFolder.add(cube.rotation, 'x', 0, Math.PI * 2)
+cubeRotationFolder.add(cube.rotation, 'y', 0, Math.PI * 2)
+cubeRotationFolder.add(cube.rotation, 'z', 0, Math.PI * 2)
+cubeRotationFolder.open() //remove this to close by default
+
 // GUI CONTROLLER - CAMERA
-const cameraFolder = gui.addFolder("Camera")
-cameraFolder.add(camera.position, 'z', 0, 20)
-cameraFolder.open() //remove this to close by default
+// const cameraFolder = gui.addFolder("Camera")
+// cameraFolder.add(camera.position, 'z', 0, 20)
+// cameraFolder.open() //remove this to close by default
+
+// GUI CONTROLLER - POSITION
+const cubePositionFolder = cubeFolder.addFolder('Position')
+cubePositionFolder.add(cube.position, 'x', -10, 10, 0.1)
+cubePositionFolder.add(cube.position, 'y', -10, 10, 0.1)
+cubePositionFolder.add(cube.position, 'z', -10, 10, 0.1)
+cubePositionFolder.open() //remove this to close by default
+
+// GUI CONTROLLER - SCALE
+const cubeScaleFolder = cubeFolder.addFolder('Scale')
+cubeScaleFolder.add(cube.scale, 'x', -5, 5)
+cubeScaleFolder.add(cube.scale, 'y', -5, 5)
+cubeScaleFolder.add(cube.scale, 'z', -5, 5)
+cubeScaleFolder.open() //remove this to close by default
+
+cubeFolder.add(cube, "visible") //remove this to close by default
 
 function animate() {
     requestAnimationFrame(animate)
